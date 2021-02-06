@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'simplebar/dist/simplebar.min.css';
+import BottomSection from './components/BottomSection';
+import TopSection from './components/TopSection';
+import Provider from './Context';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="container pt-3 h-100">
+        <div className="row h-100">
+          <div className="col overflow-hidden">
+            <Provider>
+              <TopSection />
+              <BottomSection />
+            </Provider>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
