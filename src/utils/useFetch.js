@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 
 let baseUrl =
   'https://cors-anywhere.herokuapp.com/https://listen-api-test.listennotes.com/api/v2/';
-if (true) {
+if (process.env.NODE_ENV === 'production') {
   baseUrl = 'https://listen-api.listennotes.com/api/v2/';
 }
 export default function useFetch(
