@@ -31,7 +31,7 @@ body{
         transform:translateX(30px)
       }
     }
-    .modal-cstbody{
+    .modal-cstbody,.modal-header{
       background-color:#011627;
       color: #bfc0c5;
       button{
