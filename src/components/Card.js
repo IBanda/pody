@@ -38,7 +38,7 @@ const StyledCard = styled.div`
     font-weight: 600;
   }
   h5 {
-    color: #cacfe0;
+    color: #74767b;
     font-size: 13px;
   }
 `;

@@ -11,10 +11,9 @@ body{
   height:inherit;
   margin:0;
   font-family: 'Montserrat', sans-serif !important;
-  color: #bfc0c5;
+  color: #74767b;
   &.light{
       background-color:#fff;
-      background-color: #fff;
     .theme-toggler{
       background-color: #eaeaea;
       .toggle{

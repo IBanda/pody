@@ -113,12 +113,9 @@ export default function Player({
           onEnded={onClickNext}
           src={_src}
           onPlay={() => setPlayed(true)}
-          onError={(e) => console.log(e)}
           autoPlayAfterSrcChange
           showSkipControls
-          mse={{
-            onSeek: () => console.log('seeking'),
-          }}
+          showJumpControls={false}
         />
         {isPlayed && <PToast title={_title} image={_image} id={_id} />}
       </StyledPlayer>
