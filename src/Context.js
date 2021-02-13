@@ -23,7 +23,7 @@ function initstorage() {
     },
   };
 }
-const LocalStorage = initstorage();
+export const LocalStorage = initstorage();
 const store = observable(
   {
     currentPlaying: LocalStorage.getItem('current:playing') || playing,
