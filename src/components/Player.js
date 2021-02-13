@@ -3,7 +3,7 @@ import { useState } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import styled from 'styled-components';
-import useLocalstorage from '../utils/useLocalstorage';
+import { LocalStorage } from '../Context';
 import PToast from './Toast';
 
 const StyledPlayer = styled.div`
@@ -25,7 +25,9 @@ const StyledPlayer = styled.div`
     margin-bottom: 1em;
     img {
       width: 100%;
+      height: 100%;
       object-fit: fill;
+      object-position: center;
     }
   }
   h6 {
@@ -47,7 +49,6 @@ export default function Player({
 }) {
   const { id, image, title, src } = currentPlaying || {};
   const [currentIndex, setIndex] = useState(() => getIndex(id, episodes));
-  const [, updateInStorage] = useLocalstorage('currently:playing');
   const [isPlayed, setPlayed] = useState(false);
 
   useEffect(() => {
@@ -59,14 +60,14 @@ export default function Player({
 
   useEffect(() => {
     if (currentIndex != null) {
-      updateInStorage({
+      LocalStorage.setItem('current:playing', {
         id: episodes[currentIndex]?.id,
         image: episodes[currentIndex]?.image,
         title: episodes[currentIndex]?.title,
         src: episodes[currentIndex]?.audio,
       });
     }
-  }, [currentIndex, episodes, updateInStorage]);
+  }, [currentIndex, episodes]);
 
   const onClickPrevious = () => {
     if (currentIndex > 0) {

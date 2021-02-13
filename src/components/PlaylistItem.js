@@ -18,11 +18,15 @@ const StyledPlaylistItem = styled.button`
   text-align: left;
   padding: 10px;
 
-  img {
-    max-width: 50px;
-    width: 100%;
-    border-radius: 10px;
-    margin-right: 10px;
+  .img-wrapper {
+    img {
+      width: 50px;
+      height: 50px;
+      object-position: center;
+      object-fit: fill;
+      border-radius: 10px;
+      margin-right: 10px;
+    }
   }
   p {
     font-size: 13px;
@@ -58,7 +62,10 @@ export default observer(function PlaylistItem({ playlistItem, onSetPlaylist }) {
     >
       {playlistItem ? (
         <>
-          <img src={playlistItem?.thumbnail} alt="episode" />
+          <div className="img-wrapper">
+            <img src={playlistItem?.thumbnail} alt="episode" />
+          </div>
+
           <div>
             <PlayIcon />
           </div>

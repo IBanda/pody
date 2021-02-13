@@ -16,8 +16,10 @@ const StyledToast = styled.div`
     display: flex;
     align-items: center;
     img {
-      max-width: 40px;
-      width: 100%;
+      width: 40px;
+      height: 40px;
+      object-fit: fill;
+      object-position: center;
     }
     .title {
       font-size: 12px;
