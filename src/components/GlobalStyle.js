@@ -34,11 +34,17 @@ body{
     .modal-cstbody,.modal-header{
       background-color:#011627;
       color: #bfc0c5;
+      button.close{
+          color:#fff;
+        }
+      .episodes{
       button{
         background-color:transparent;
         &,p{
         color:#bfc0c5;
         }
+     
+      }
       }
     }
   }

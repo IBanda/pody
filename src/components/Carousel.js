@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import settings from '../utils/settings';
 import useFetch from '../utils/useFetch';
 import ErrorBoundary from './ErrorBoundary';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const StyledCarousel = styled.div`
   margin-bottom: 0.5em;

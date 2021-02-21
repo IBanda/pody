@@ -37,13 +37,23 @@ const StyledDiv = styled.div`
   .desc-container {
     font-size: 12px;
   }
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    li {
-      button {
-        background-color: #fff;
+  .episodes {
+    &-simple-bar {
+      max-height: 32em;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+          button {
+            background-color: #fff;
+          }
+        }
+      }
+      @media (max-width: 576px) {
+        & {
+          max-height: 17em;
+        }
       }
     }
   }
@@ -72,16 +82,20 @@ export default observer(function AppModal({ podcastId, show, onHide }) {
         {!(status === 'pending') ? (
           <div className="row">
             <div className="col-lg-5 pod-data">
-              <img className="cover" src={data?.image} alt="cover" />
+              <img
+                className="cover d-none d-md-block"
+                src={data?.image}
+                alt="cover"
+              />
               <h6 className="title">{data.title}</h6>
-              <SimpleBar className="pod-desc-simple-bar">
+              <SimpleBar className="pod-desc-simple-bar d-none d-md-block">
                 <div className="desc-container">
                   {compiler(data?.description || '')}
                 </div>
               </SimpleBar>
             </div>
-            <div className="col-lg-7 ">
-              <SimpleBar style={{ maxHeight: '32em' }}>
+            <div className="col-lg-7 episodes">
+              <SimpleBar className="episodes-simple-bar">
                 <ul>
                   {data?.episodes?.map((episode) => (
                     <li key={episode?.id}>
