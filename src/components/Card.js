@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import ContentLoader from 'react-content-loader';
+import LazyImage from './LazyImage';
 
 const StyledCard = styled.div`
   width: 255px;
   height: 355px;
+  position: relative;
   @media (max-width: 1439.98px) {
     width: 220px;
     height: 300px;
@@ -46,7 +48,7 @@ export default function Card({ src, author, title }) {
   return (
     <StyledCard data-testid="pd-card">
       {src ? (
-        <img src={src} alt="podcast" />
+        <LazyImage src={src} alt="podcast" />
       ) : (
         <ContentLoader
           speed={2}
