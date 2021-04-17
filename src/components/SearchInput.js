@@ -88,7 +88,7 @@ export default function SearchInput({ handleModal }) {
     ) {
       return setPayload((prev) => ({ ...prev, status: 'resolved' }));
     }
-    // setPayload({ status: 'idle', data: [] });
+    setPayload({ status: 'idle', data: [] });
     handleLazyFetch(
       `search?q=${encodeURIComponent(
         value
@@ -100,11 +100,8 @@ export default function SearchInput({ handleModal }) {
   };
 
   const onBlur = (e) => {
-    if (!e.relatedTarget?.id?.includes('search')) {
-      setPayload((prev) => ({
-        ...prev,
-        status: 'idle',
-      }));
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setPayload((prev) => ({ ...prev, status: 'idle' }));
     }
   };
 
