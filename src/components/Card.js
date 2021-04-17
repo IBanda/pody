@@ -28,7 +28,6 @@ const StyledCard = styled.div`
     object-fit: fill;
     width: 100%;
     border-radius: 1em;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
   }
   h4,
   h5 {
