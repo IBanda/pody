@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import useFetch from '../utils/useFetch';
 import ResultsList from './ResultsList';
-import ThemeToggle from './ThemeToggle';
 import Toggle from './Toggle';
 
 const StyledForm = styled.form`
@@ -11,12 +10,10 @@ const StyledForm = styled.form`
   margin-left: auto;
   .input-wrapper {
     display: flex;
-    border-radius: 999px;
+    border-radius: 10px;
     overflow: hidden;
-    border: 2px solid #bfc0c5;
-
     &.remove-bt-border {
-      border-radius: 20px 20px 0 0;
+      border-radius: 10px 10px 0 0;
       border-bottom: none;
     }
     input,
@@ -44,12 +41,12 @@ const StyledForm = styled.form`
 `;
 const StyledToggleWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  margin-bottom: 10px;
+  margin-top: 10px;
   span {
-    margin: 0 10px;
     font-size: 12px;
+    margin-right: 10px;
+    color: #fff;
   }
 `;
 
@@ -115,15 +112,6 @@ export default function SearchInput({ handleModal }) {
 
   return (
     <>
-      <StyledToggleWrapper>
-        <span>{searchType}</span>{' '}
-        <Toggle
-          data-testid="search-toggle"
-          onToggle={onSearchTypeChange}
-          className="mr-2"
-        />
-        | <ThemeToggle />
-      </StyledToggleWrapper>
       <StyledForm onSubmit={onSearch} onBlur={onBlur} autoComplete="off">
         <div
           className={`input-wrapper ${
@@ -150,6 +138,10 @@ export default function SearchInput({ handleModal }) {
           searchStatus={status}
         />
       </StyledForm>
+      <StyledToggleWrapper className="justify-content-end justify-content-xl-start">
+        <span className="text-capitalize">{searchType}</span>{' '}
+        <Toggle data-testid="search-toggle" onToggle={onSearchTypeChange} />
+      </StyledToggleWrapper>
     </>
   );
 }

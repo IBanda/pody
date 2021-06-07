@@ -1,25 +1,32 @@
 const settings = {
   dots: false,
-  slidesToShow: 4,
+  slidesToShow: 7,
   slidesToScroll: 1,
   initialSlide: 0,
   arrows: false,
   lazyLoad: true,
   infinite: true,
-  autoplay: true,
+  autoplay: false,
   swipe: true,
   responsive: [
     {
+      breakpoint: 1560,
+      settings: {
+        slidesToShow: 5,
+        slidesToScroll: 1,
+      },
+    },
+    {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 3,
+        slidesToShow: 5,
         slidesToScroll: 1,
       },
     },
     {
       breakpoint: 768,
       settings: {
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         initialSlide: 2,
       },
@@ -27,7 +34,7 @@ const settings = {
     {
       breakpoint: 576,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 3,
         slidesToScroll: 1,
         initialSlide: 2,
       },
@@ -35,8 +42,8 @@ const settings = {
     {
       breakpoint: 480,
       settings: {
-        centerMode: true,
-        centerPadding: '10px',
+        // centerMode: true,
+        // centerPadding: '10px',
         arrows: false,
         slidesToShow: 2,
         slidesToScroll: 1,
@@ -46,10 +53,10 @@ const settings = {
     {
       breakpoint: 320,
       settings: {
-        centerMode: true,
-        centerPadding: '10px',
+        // centerMode: true,
+        // centerPadding: '10px',
         arrows: false,
-        slidesToShow: 1,
+        slidesToShow: 2,
         slidesToScroll: 1,
         initialSlide: 1,
       },

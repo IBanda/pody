@@ -65,7 +65,7 @@ const defaultVal = {};
 
 export default observer(function AppModal({ podcastId, show, onHide }) {
   const [{ status, data }] = useFetch(
-    `podcasts/${podcastId}?sort=recent_first`,
+    `podcasts/${podcastId}?sort=oldest_first`,
     {
       defaultVal,
       defaultStatus: 'pending',

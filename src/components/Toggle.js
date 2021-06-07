@@ -15,8 +15,9 @@ const StyledToggle = styled.button`
   height: ${(props) => size[props.size]}px;
   display: flex;
   align-items: center;
-  background-color: ${(props) => (props.isToggled ? '#70e000' : '#eaeaea')};
+  background-color: ${(props) => (props.isToggled ? '#73C8A9' : '#eaeaea')};
   border-radius: 999px;
+  border: 0;
   outline: none;
   position: relative;
   padding: 0;

@@ -2,7 +2,7 @@ import { rest } from 'msw';
 
 const playlistReq = [
   rest.get(
-    'https://cors-anywhere.herokuapp.com/https://listen-api-test.listennotes.com/api/v2/playlists/kr3-ta28cJu?type=episode_list&last_timestamp_ms=0&sort=recent_added_first',
+    'https://cors-anywhere.herokuapp.com/https://listen-api-test.listennotes.com/api/v2/playlists/kr3-ta28cJu?type=episode_list&last_timestamp_ms=0&sort=oldest_added_first',
     (req, res, ctx) => {
       return res(
         ctx.json({

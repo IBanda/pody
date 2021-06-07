@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Slick from 'react-slick';
 import Card from './Card';
 import styled from 'styled-components';
@@ -7,10 +7,17 @@ import useFetch from '../utils/useFetch';
 import ErrorBoundary from './ErrorBoundary';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Modal from './Modal';
+import { usePlayer } from '../Context';
+import { observer } from 'mobx-react-lite';
 
 const StyledCarousel = styled.div`
   margin-bottom: 0.5em;
-
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.12);
+  padding: 1em;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #fff;
   @media (min-width: 1440px) {
     .slick-slider {
       margin-right: -25px;
@@ -25,7 +32,7 @@ const StyledCarousel = styled.div`
     h3 {
       margin: 0;
       font-weight: 700;
-      font-size: 1.5em;
+      font-size: 1.05em;
     }
     img {
       max-width: 20px;
@@ -37,7 +44,7 @@ const StyledCarousel = styled.div`
     cursor: pointer;
   }
 `;
-export default function Carousel({ handleModal }) {
+export default observer(function Carousel() {
   const [page, setPage] = useState(1);
   const [payload, , handleLazyDispatch] = useFetch(
     'best_podcasts?page=5&region=us&safe_mode=0',
@@ -46,6 +53,14 @@ export default function Carousel({ handleModal }) {
       lazy: true,
     }
   );
+
+  const { genreId } = usePlayer();
+
+  useEffect(() => {
+    if (genreId) {
+      handleLazyDispatch(`best_podcasts?genre_id=${genreId}`);
+    }
+  }, [genreId, handleLazyDispatch]);
 
   const onLazyDispatch = () => {
     handleLazyDispatch(`best_podcasts?page=${page}&region=us&safe_mode=0`);
@@ -57,12 +72,21 @@ export default function Carousel({ handleModal }) {
 
   return (
     <ErrorBoundary onReset={onLazyDispatch}>
-      <CarouselView payload={payload} handleModal={handleModal} />
+      <CarouselView payload={payload} />
     </ErrorBoundary>
   );
-}
+});
 
-function CarouselView({ payload: { data, status, error } = {}, handleModal }) {
+function CarouselView({ payload: { data, status, error } = {} }) {
+  const [modal, setModal] = useState('close');
+  const [podcastId, setId] = useState('');
+  const handleModal = (id) => {
+    setId(id);
+    setModal('show');
+  };
+  const onCloseModal = () => {
+    setModal('close');
+  };
   const carouselRef = useRef();
   const handleNext = () => {
     carouselRef.current.slickNext();
@@ -78,48 +102,54 @@ function CarouselView({ payload: { data, status, error } = {}, handleModal }) {
   const handleClick = (id) => {
     handleModal(id);
   };
+  const show = modal === 'show';
   return (
-    <StyledCarousel>
-      <div className="carousel-header ">
-        <h3>Top Podcasts</h3>
-        <div>
-          <CarouselControl onClick={handlePrev}>
-            <img src="/chevron-left.png" alt="left" />
-          </CarouselControl>
-          <CarouselControl onClick={handleNext}>
-            <img src="/chevron-right.png" alt="right" />
-          </CarouselControl>
-        </div>
-      </div>
-      <Slick ref={carouselRef} {...settings}>
-        {results.map((podcast, index) => (
-          <div
-            className="carousel-item"
-            onClick={() => handleClick(podcast.id)}
-            key={podcast?.id || index}
-          >
-            <Card
-              src={podcast?.image}
-              author={podcast?.publisher}
-              title={podcast?.title}
-            />
+    <>
+      <StyledCarousel className="carousel">
+        <div className="carousel-header ">
+          <h3>Top Podcasts</h3>
+          <div>
+            <CarouselControl onClick={handlePrev}>
+              <img src="/chevron-left.png" alt="left" />
+            </CarouselControl>
+            <CarouselControl onClick={handleNext}>
+              <img src="/chevron-right.png" alt="right" />
+            </CarouselControl>
           </div>
-        ))}
-      </Slick>
-    </StyledCarousel>
+        </div>
+        <Slick ref={carouselRef} {...settings}>
+          {results.map((podcast, index) => (
+            <div
+              className="carousel-item col pl-0"
+              onClick={() => handleClick(podcast.id)}
+              key={podcast?.id || index}
+            >
+              <Card
+                src={podcast?.image}
+                author={podcast?.publisher}
+                title={podcast?.title}
+              />
+            </div>
+          ))}
+        </Slick>
+      </StyledCarousel>
+      {show && (
+        <Modal podcastId={podcastId} show={show} onHide={onCloseModal} />
+      )}
+    </>
   );
 }
 
 const ChevronButton = styled.button`
   background-color: transparent;
-  border: none;
+  border: 1px solid rgb(30, 60, 114);
   outline: none !important;
   cursor: pointer;
 `;
 
 function CarouselControl({ children, onClick }) {
   return (
-    <ChevronButton type="button" onClick={onClick}>
+    <ChevronButton className="mr-2 rounded" type="button" onClick={onClick}>
       {children}
     </ChevronButton>
   );

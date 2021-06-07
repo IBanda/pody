@@ -14,7 +14,7 @@ export default function LazyImage(props) {
         <ContentLoader
           speed={2}
           width="100%"
-          height="75%"
+          height="100%"
           backgroundColor="#f2f2f2"
           foregroundColor="#f2f2f2"
           style={{ position: 'absolute', top: 0 }}

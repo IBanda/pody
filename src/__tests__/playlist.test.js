@@ -9,7 +9,6 @@ test('playlist items should play and set playlist for player', async () => {
   await waitFor(() => screen.getAllByAltText('episode'));
 
   const buttons = screen.getAllByTestId('playlist-item');
-
   userEvent.click(buttons[0]);
 
   expect(onSetPlaylist).toHaveBeenCalled();

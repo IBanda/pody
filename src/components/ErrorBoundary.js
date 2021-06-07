@@ -2,7 +2,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 
 const StyledAlert = styled.div`
-  min-height: 40vh;
+  padding-top: 4em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +16,12 @@ function ErrorFallback({ error, resetErrorBoundary }) {
   return (
     <StyledAlert role="alert">
       <h6>Something went wrong:</h6>
-      <button onClick={resetErrorBoundary}>Try again</button>
+      <button
+        className="btn btn-warning text-white"
+        onClick={resetErrorBoundary}
+      >
+        Try again
+      </button>
     </StyledAlert>
   );
 }

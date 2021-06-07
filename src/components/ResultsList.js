@@ -7,9 +7,9 @@ const StyledResultList = styled.div`
   position: absolute;
   width: 100%;
   box-shadow: 0 4px 6px rgba(32, 33, 36, 0.18);
-  border-radius: 0 0 30px 30px;
+  border-radius: 0 0 10px 10px;
   background-color: #fff;
-  border: 2px solid #bfc0c5;
+  border-top: 1px solid lightcoral;
   z-index: 2;
   color: #000;
   padding: 10px 0;
@@ -43,7 +43,7 @@ const StyledListItem = styled.li`
     img {
       max-width: 50px;
       width: 100%;
-      border-radius: 50%50%;
+      border-radius: 10px;
       margin-right: 1em;
     }
     p {

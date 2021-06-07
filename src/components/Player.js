@@ -11,14 +11,22 @@ const StyledPlayer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2em;
   text-align: center;
-  background-color: #1b262c;
+  background-color: #fff;
   padding: 1em;
   border-radius: 10px;
+  height: 100%;
+
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.12);
+  background: rgb(30, 60, 114);
+  background: linear-gradient(
+    90deg,
+    rgba(30, 60, 114, 1) 0%,
+    rgba(42, 82, 152, 1) 50%
+  );
   .image-wrapper {
-    width: 85px;
-    height: 85px;
+    width: 10em;
+    height: 10em;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
@@ -35,6 +43,28 @@ const StyledPlayer = styled.div`
     font-weight: 600;
     margin-bottom: 1.5em;
     color: #fff;
+  }
+  .rhap_container {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    .rhap_main-controls-button {
+      color: #eee;
+      outline: none;
+    }
+    .rhap_progress-bar {
+      outline: none;
+    }
+    .rhap_progress-indicator {
+      background-color: #c70039;
+    }
+    .rhap_progress-filled {
+      background-color: #0e49b5;
+    }
+    .rhap_time {
+      color: #fff;
+    }
   }
 `;
 
@@ -91,35 +121,24 @@ export default function Player({
   }
 
   return (
-    <>
-      <h3
-        style={{
-          fontSize: '1.5em',
-          fontWeight: '600',
-          marginBottom: '.5em',
-        }}
-      >
-        Now playing
-      </h3>
-      <StyledPlayer className="player">
-        <div className="image-wrapper">
-          {!!image && <img src={_image} alt="playing" />}
-        </div>
-        <h6 data-testid="playing-title" className="w-100 text-truncate">
-          {_title || 'Not playing'}
-        </h6>
-        <AudioPlayer
-          onClickPrevious={onClickPrevious}
-          onClickNext={onClickNext}
-          onEnded={onClickNext}
-          src={_src}
-          onPlay={() => setPlayed(true)}
-          autoPlayAfterSrcChange
-          showSkipControls
-          showJumpControls={false}
-        />
-        {isPlayed && <PToast title={_title} image={_image} id={_id} />}
-      </StyledPlayer>
-    </>
+    <StyledPlayer className="player">
+      <div className="image-wrapper d-none d-xl-block">
+        {!!image && <img src={_image} alt="playing" />}
+      </div>
+      <h6 data-testid="playing-title" className="w-100 text-truncate">
+        {_title || 'Not playing'}
+      </h6>
+      <AudioPlayer
+        onClickPrevious={onClickPrevious}
+        onClickNext={onClickNext}
+        onEnded={onClickNext}
+        src={_src}
+        onPlay={() => setPlayed(true)}
+        autoPlayAfterSrcChange
+        showSkipControls
+        showJumpControls={false}
+      />
+      {isPlayed && <PToast title={_title} image={_image} id={_id} />}
+    </StyledPlayer>
   );
 }

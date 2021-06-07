@@ -44,9 +44,9 @@ export default function useFetch(
     }
   }, [defaultVal, fetchLink, key, setPayload]);
 
-  const handleLazyFetch = (link) => {
+  const handleLazyFetch = useCallback((link) => {
     setFetchLink(link);
-  };
+  }, []);
 
   if (lazy) return [payload, setPayload, handleLazyFetch];
 

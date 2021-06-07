@@ -9,14 +9,14 @@ const StyledPlaylistItem = styled.button`
   display: flex;
   cursor: pointer;
   align-items: center;
-  background-color: #455e89;
+  background-color: #fff;
   position: relative;
   border: none;
   border-radius: 10px;
   outline: none;
   width: 100%;
   text-align: left;
-  padding: 10px;
+  padding: 5px 0;
 
   .img-wrapper {
     img {
