@@ -84,6 +84,7 @@ export default observer(function Player({
     setPlayerStatus,
     playerStatus,
     playerStatusChangeSource,
+    updatePlaying,
   } = usePlayer();
 
   const playBtnRef = useRef();
@@ -106,13 +107,16 @@ export default observer(function Player({
 
   useEffect(() => {
     if (currentIndex != null) {
-      LocalStorage.setItem('current:playing', {
+      const item = {
         id: episodes[currentIndex]?.id,
         image: episodes[currentIndex]?.image,
         title: episodes[currentIndex]?.title,
         src: episodes[currentIndex]?.audio,
-      });
+      };
+      LocalStorage.setItem('current:playing', item);
+      updatePlaying(item);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex, episodes]);
 
   const onClickPrevious = () => {

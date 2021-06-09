@@ -13,7 +13,7 @@ const StyledForm = styled.form`
     border-radius: 10px;
     overflow: hidden;
     &.remove-bt-border {
-      border-radius: 10px 10px 0 0;
+      border-radius: 10px 10px 0 0 !important;
       border-bottom: none;
     }
     input,
