@@ -117,7 +117,7 @@ export default observer(function Player({
       updatePlaying(item);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentIndex, episodes]);
+  }, [currentIndex]);
 
   const onClickPrevious = () => {
     if (currentIndex > 0) {
