@@ -9,7 +9,7 @@ const StyledResultList = styled.div`
   box-shadow: 0 4px 6px rgba(32, 33, 36, 0.18);
   border-radius: 0 0 10px 10px;
   background-color: #fff;
-  border-top: 1px solid lightcoral;
+
   z-index: 2;
   color: #000;
   padding: 10px 0;

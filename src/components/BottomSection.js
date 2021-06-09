@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const StyledRow = styled.div`
   position: absolute;
-  top: 310px;
+  top: 320px;
   bottom: 0;
   width: 100%;
 
@@ -39,24 +39,35 @@ const StyledRow = styled.div`
       }
     }
   }
-  @media (max-width: 1200px) {
-    & {
-      bottom: 160px;
-    }
+
+  @media (max-width: 1024px) {
+    top: 300px;
+    bottom: 160px;
   }
-  @media (max-width: 575px) {
-    bottom: 100px;
+  @media (max-width: 992px) {
     top: 300px;
   }
+  @media (max-width: 768px) {
+    top: 297px;
+  }
+  @media (max-width: 576px) and (min-width: 425px) {
+    top: 278px;
+    bottom: 100px;
+  }
+  @media (max-width: 424.98px) and (min-width: 321px) {
+    top: 260px;
+    bottom: 100px;
+  }
   @media (max-width: 320px) {
-    top: 280px;
+    bottom: 100px;
+    top: 240px;
   }
 `;
 
 export default observer(function BottomSection() {
   const { currentPlaying, currentPlaylist, updatePlaylist } = usePlayer();
   return (
-    <StyledRow className="row">
+    <StyledRow className="row ">
       <div className="col-xl-6 h-100  mb-3 mb-lg-0 pb-3">
         <Playlist onSetPlaylist={updatePlaylist} playlist={currentPlaylist} />
       </div>

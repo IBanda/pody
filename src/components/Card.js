@@ -4,8 +4,9 @@ import LazyImage from './LazyImage';
 
 const StyledCard = styled.div`
   .card-img {
-    width: 150px;
-    height: 150px;
+    /* width: 150px;
+    height: 150px; */
+    /* 
     position: relative;
     @media (max-width: 1500px) {
       width: 165px;
@@ -23,13 +24,13 @@ const StyledCard = styled.div`
     }
 
     @media (max-width: 375px) {
-      width: 145px;
-      height: 145px;
+      width: 90px;
+      height: 90px;
     }
     @media (max-width: 320px) {
-      width: 120px;
-      height: 120px;
-    }
+      width: 75px;
+      height: 75px;
+    }*/
     img {
       object-fit: fill;
       width: 100%;
@@ -76,7 +77,7 @@ export default function Card({ src, author, title }) {
       ) : (
         <ContentLoader
           speed={2}
-          width={'100%'}
+          width="100%"
           height={50}
           backgroundColor="#f3f3f3"
           foregroundColor="#ecebeb"

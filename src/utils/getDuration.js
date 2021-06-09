@@ -1,4 +1,5 @@
 export default function getDuration(seconds) {
+  if (!seconds) return 'N/A';
   let hours = Math.floor(seconds / 3600);
   const time = seconds - hours * 3600;
   const minutes = Math.floor(time / 60);

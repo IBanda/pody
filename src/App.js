@@ -1,10 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'simplebar/dist/simplebar.min.css';
-import BottomSection from './components/BottomSection';
-import Carousel from './components/Carousel';
 import Genres from './components/Genres';
-import TopSection from './components/TopSection';
-
+import RightSection from './components/RightSection';
+import LeftSideBar from './components/LeftSideBar';
 import Provider from './Context';
 
 function App() {
@@ -14,15 +12,14 @@ function App() {
         <div className="row h-100 w-100 m-0">
           <Provider>
             <div className=" col-xl-3 search">
-              <TopSection />
+              <LeftSideBar />
               <Genres />
             </div>
             <div
               className=" col-xl-9 pt-3 h-100"
               style={{ backgroundColor: '#f6f8fa' }}
             >
-              <Carousel />
-              <BottomSection />
+              <RightSection />
             </div>
           </Provider>
         </div>

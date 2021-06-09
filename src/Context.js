@@ -29,6 +29,8 @@ const store = observable(
     currentPlaying: LocalStorage.getItem('current:playing') || playing,
     currentPlaylist: LocalStorage.getItem('current:playlist') || playlist,
     genreId: '',
+    playerStatus: '',
+    playerStatusChangeSource: '',
     updatePlaying(item) {
       this.currentPlaying = item;
       LocalStorage.setItem('current:playing', item);
@@ -41,6 +43,10 @@ const store = observable(
     },
     updateGenre(id) {
       this.genreId = id;
+    },
+    setPlayerStatus(status, source = '') {
+      this.playerStatus = status;
+      this.playerStatusChangeSource = source;
     },
   },
   undefined,

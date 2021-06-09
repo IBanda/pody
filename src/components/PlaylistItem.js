@@ -4,6 +4,7 @@ import PlayIcon from './icons/Play';
 import ContentLoader from 'react-content-loader';
 import { usePlayer } from '../Context';
 import { observer } from 'mobx-react-lite';
+import PauseIcon from './icons/Pause';
 
 const StyledPlaylistItem = styled.button`
   display: flex;
@@ -43,7 +44,12 @@ const StyledPlaylistItem = styled.button`
 `;
 
 export default observer(function PlaylistItem({ playlistItem, onSetPlaylist }) {
-  const { updatePlaying } = usePlayer();
+  const {
+    updatePlaying,
+    currentPlaying: { id },
+    playerStatus,
+    setPlayerStatus,
+  } = usePlayer();
   function handleClick(_episode) {
     updatePlaying({
       id: _episode?.id,
@@ -51,10 +57,17 @@ export default observer(function PlaylistItem({ playlistItem, onSetPlaylist }) {
       image: _episode?.image,
       title: _episode?.title,
     });
+    setPlayerStatus(
+      id === _episode.id && playerStatus === 'playing' ? 'paused' : 'playing',
+      'playlist'
+    );
     if (typeof onSetPlaylist === 'function') {
       onSetPlaylist();
     }
   }
+
+  const isPaused = playerStatus === 'playing';
+
   return (
     <StyledPlaylistItem
       data-testid="playlist-item"
@@ -63,11 +76,14 @@ export default observer(function PlaylistItem({ playlistItem, onSetPlaylist }) {
       {playlistItem ? (
         <>
           <div className="img-wrapper">
-            <img src={playlistItem?.thumbnail} alt="episode" />
+            <img
+              src={playlistItem?.thumbnail ?? '/placeholder.svg'}
+              alt="episode"
+            />
           </div>
 
           <div>
-            <PlayIcon />
+            {id === playlistItem.id && isPaused ? <PauseIcon /> : <PlayIcon />}
           </div>
 
           <p className="d-block text-truncate">{playlistItem?.title}</p>
@@ -80,8 +96,8 @@ export default observer(function PlaylistItem({ playlistItem, onSetPlaylist }) {
           speed={2}
           width="100%"
           height={52}
-          backgroundColor="#b0b0b0"
-          foregroundColor="#bababa"
+          backgroundColor="#f3f3f3"
+          foregroundColor="#ecebeb"
         >
           <rect x="0" y="0" rx="10" ry="10" width="50" height="50" />
           <rect x="75" y="20" rx="0" ry="0" width="80%" height="12" />

@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useEffect, useRef, useState } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import styled from 'styled-components';
-import { LocalStorage } from '../Context';
+import { LocalStorage, usePlayer } from '../Context';
 import PToast from './Toast';
 
 const StyledPlayer = styled.div`
@@ -73,13 +73,29 @@ function getIndex(id, arr = []) {
   if (i >= 0) return i;
   return null;
 }
-export default function Player({
+export default observer(function Player({
   currentPlaying,
   playlist: { episodes } = {},
 }) {
   const { id, image, title, src } = currentPlaying || {};
   const [currentIndex, setIndex] = useState(() => getIndex(id, episodes));
   const [isPlayed, setPlayed] = useState(false);
+  const {
+    setPlayerStatus,
+    playerStatus,
+    playerStatusChangeSource,
+  } = usePlayer();
+
+  const playBtnRef = useRef();
+  useEffect(() => {
+    playBtnRef.current = document.querySelector('.rhap_play-pause-button');
+  }, []);
+
+  useEffect(() => {
+    if (playBtnRef.current && playerStatusChangeSource === 'playlist') {
+      playBtnRef.current.click();
+    }
+  }, [playerStatus, playerStatusChangeSource]);
 
   useEffect(() => {
     const idx = getIndex(id, episodes);
@@ -109,6 +125,19 @@ export default function Player({
       setIndex((prev) => prev + 1);
     }
   };
+
+  const onPlay = () => {
+    setPlayed(true);
+    setPlayerStatus('playing', 'player');
+  };
+
+  const onPlayError = (e) => {
+    setPlayerStatus('stopped');
+    if (e.message.includes('NotSupportedError')) {
+      alert(e.message);
+    }
+  };
+
   let _id = id;
   let _image = image;
   let _title = title;
@@ -119,11 +148,15 @@ export default function Player({
     _title = episodes[currentIndex]?.title;
     _src = episodes[currentIndex]?.audio;
   }
-
+  const hasImage = !!_image;
   return (
     <StyledPlayer className="player">
-      <div className="image-wrapper d-none d-xl-block">
-        {!!image && <img src={_image} alt="playing" />}
+      <div
+        className={`image-wrapper d-none d-xl-block ${
+          hasImage ? '' : 'bg-white'
+        }`}
+      >
+        <img src={hasImage ? _image : '/placeholder.svg'} alt="playing" />
       </div>
       <h6 data-testid="playing-title" className="w-100 text-truncate">
         {_title || 'Not playing'}
@@ -133,12 +166,14 @@ export default function Player({
         onClickNext={onClickNext}
         onEnded={onClickNext}
         src={_src}
-        onPlay={() => setPlayed(true)}
+        onPlay={onPlay}
+        onPause={() => setPlayerStatus('paused', 'player')}
         autoPlayAfterSrcChange
         showSkipControls
         showJumpControls={false}
+        onPlayError={onPlayError}
       />
       {isPlayed && <PToast title={_title} image={_image} id={_id} />}
     </StyledPlayer>
   );
-}
+});

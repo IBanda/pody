@@ -44,7 +44,7 @@ export default function PToast({ id, title, image }) {
           <h6 className="playing">Now Playing</h6>
           <div className="pt-body">
             <div className="mr-2">
-              <img src={image} alt="cover" />
+              <img src={image ? image : '/placeholder.svg'} alt="cover" />
             </div>
             <p className="title d-block text-truncate">{title}</p>
           </div>

@@ -17,9 +17,9 @@ export default function PlayIcon() {
       <g>
         <title>Layer 1</title>
         <path
-          stroke="#dadde7"
+          stroke="#121aaa"
           id="svg_1"
-          fill="#dadde7"
+          fill="#fff"
           d="m18.000001,11.998484a1,1 0 0 1 -0.55,0.89l-10,5a1,1 0 0 1 -0.45,0.11a1,1 0 0 1 -0.53,-0.15a1,1 0 0 1 -0.47,-0.85l0,-10a1,1 0 0 1 1.45,-0.89l10,5a1,1 0 0 1 0.55,0.89z"
         />
       </g>

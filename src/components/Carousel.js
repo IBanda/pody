@@ -18,11 +18,6 @@ const StyledCarousel = styled.div`
   overflow: hidden;
   border-radius: 10px;
   background-color: #fff;
-  @media (min-width: 1440px) {
-    .slick-slider {
-      margin-right: -25px;
-    }
-  }
   .carousel-header {
     display: flex;
     align-items: center;
@@ -44,7 +39,7 @@ const StyledCarousel = styled.div`
     cursor: pointer;
   }
 `;
-export default observer(function Carousel() {
+function Carousel() {
   const [page, setPage] = useState(1);
   const [payload, , handleLazyDispatch] = useFetch(
     'best_podcasts?page=5&region=us&safe_mode=0',
@@ -53,7 +48,6 @@ export default observer(function Carousel() {
       lazy: true,
     }
   );
-
   const { genreId } = usePlayer();
 
   useEffect(() => {
@@ -75,11 +69,16 @@ export default observer(function Carousel() {
       <CarouselView payload={payload} />
     </ErrorBoundary>
   );
-});
+}
 
-function CarouselView({ payload: { data, status, error } = {} }) {
+function CarouselView({
+  payload: { data, status, error } = {},
+  updateLayoutTop,
+}) {
   const [modal, setModal] = useState('close');
   const [podcastId, setId] = useState('');
+  const carouselRef = useRef();
+
   const handleModal = (id) => {
     setId(id);
     setModal('show');
@@ -87,7 +86,7 @@ function CarouselView({ payload: { data, status, error } = {} }) {
   const onCloseModal = () => {
     setModal('close');
   };
-  const carouselRef = useRef();
+
   const handleNext = () => {
     carouselRef.current.slickNext();
   };
@@ -120,7 +119,7 @@ function CarouselView({ payload: { data, status, error } = {} }) {
         <Slick ref={carouselRef} {...settings}>
           {results.map((podcast, index) => (
             <div
-              className="carousel-item col pl-0"
+              className="carousel-item col p-1 "
               onClick={() => handleClick(podcast.id)}
               key={podcast?.id || index}
             >
@@ -154,3 +153,4 @@ function CarouselControl({ children, onClick }) {
     </ChevronButton>
   );
 }
+export default observer(Carousel);
