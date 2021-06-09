@@ -97,7 +97,10 @@ export default function SearchInput({ handleModal }) {
   };
 
   const onBlur = (e) => {
-    if (!e.currentTarget.contains(e.relatedTarget)) {
+    if (
+      !e.currentTarget.contains(e.relatedTarget) ||
+      e.currentTarget === e.target
+    ) {
       setPayload((prev) => ({ ...prev, status: 'idle' }));
     }
   };
