@@ -91,7 +91,7 @@ export default function SearchInput({ handleModal }) {
         value
       )}&sort_by_date=0&type=${searchType}&offset=0&len_min=10&len_max=30${
         isEp ? '&episode_count_max=10' : ''
-      }&genre_ids=68%2C82&published_before=1580172454000&published_after=0&only_in=title%2Cdescription&language=English&safe_mode=0`
+      }&genre_ids=68%2C82&published_before=1580172454000&published_after=0&only_in=title%2Cdescription&language=English&safe_mode=1`
     );
     valRef.current = { value, searchType };
   };
