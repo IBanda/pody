@@ -18,12 +18,16 @@ export default function LazyImage(props) {
           viewBox="0 0 150 150"
           backgroundColor="#f2f2f2"
           foregroundColor="#f2f2f2"
-          style={{ position: 'absolute', top: 0 }}
+          style={{ position: 'absolute', top: 0, left: 0 }}
         >
           <rect x="0" y="0" rx="10" ry="10" width="100%" height="100%" />
         </ContentLoader>
       ) : null}
-      <img {...props} onLoad={onLoad} />
+      <img
+        style={{ position: loading ? 'relative' : 'absolute', top: 0, left: 0 }}
+        {...props}
+        onLoad={onLoad}
+      />
     </>
   );
 }
