@@ -6,7 +6,7 @@ const settings = {
   arrows: false,
   lazyLoad: true,
   infinite: true,
-  autoplay: true,
+  autoplay: false,
   swipe: true,
   responsive: [
     {
