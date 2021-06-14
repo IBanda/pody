@@ -4,33 +4,6 @@ import LazyImage from './LazyImage';
 
 const StyledCard = styled.div`
   .card-img {
-    /* width: 150px;
-    height: 150px; */
-    /* 
-    position: relative;
-    @media (max-width: 1500px) {
-      width: 165px;
-      height: 165px;
-    }
-    @media (max-width: 1023.98px) {
-      width: 140px;
-      height: 140px;
-    }
-    @media (max-width: 576px) {
-      & {
-        width: 150px;
-        height: 150px;
-      }
-    }
-
-    @media (max-width: 375px) {
-      width: 90px;
-      height: 90px;
-    }
-    @media (max-width: 320px) {
-      width: 75px;
-      height: 75px;
-    }*/
     img {
       object-fit: fill;
       width: 100%;
@@ -54,7 +27,10 @@ const StyledCard = styled.div`
 export default function Card({ src, author, title }) {
   return (
     <StyledCard data-testid="pd-card">
-      <div className="position-relative card-img">
+      <div
+        className="position-relative card-img"
+        style={{ padding: src ? '50%' : '' }}
+      >
         {src ? (
           <LazyImage src={src} alt="podcast" />
         ) : (
