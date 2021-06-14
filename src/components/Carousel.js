@@ -18,6 +18,7 @@ const StyledCarousel = styled.div`
   overflow: hidden;
   border-radius: 10px;
   background-color: #fff;
+
   .carousel-header {
     display: flex;
     align-items: center;
@@ -71,10 +72,7 @@ function Carousel() {
   );
 }
 
-function CarouselView({
-  payload: { data, status, error } = {},
-  updateLayoutTop,
-}) {
+function CarouselView({ payload: { data, status } = {} }) {
   const [modal, setModal] = useState('close');
   const [podcastId, setId] = useState('');
   const carouselRef = useRef();
